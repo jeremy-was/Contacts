@@ -72,7 +72,7 @@ def delete_contact():
             print("No contacts found, try again")
             continue
     if number_of > 1:
-        name2 = input("\nMore than 1 match. Now type fully, as above, the contact name to delete:  ")
+        name2 = input("\nMore than 1 match found. Now type fully, as above, the contact name to delete:  ")
     else:
         name2 = input("\nNow type name fully, as above, to confirm delete:  ")
     sql = f"DELETE FROM contacts WHERE name LIKE '{name2}'"
@@ -114,6 +114,7 @@ def number_of_rows():
     print(f"\nNumber of contacts {total_records}\n")
 
 def search_contacts():
+    print("\n"*25)
     search_it = input("\nEnter a name to search (% is wildcard):   ")
     sql = f"SELECT * FROM contacts WHERE name LIKE '{search_it}'"
     cursor.execute(sql)
@@ -122,8 +123,9 @@ def search_contacts():
     for row in rows:
         number_of_rows += 1
     print(f"\n     Search found {number_of_rows} contacts\n")
-    for row in rows:
-        print(row)
+    # for row in rows:
+    #     print(row)
+    print(pd.read_sql_query(f"SELECT * FROM contacts WHERE name LIKE '{search_it}' ORDER BY name", connection))
     print("\n1. Search again")
     print("2. Main Menu")
     print("3. Quit app\n")
@@ -151,7 +153,7 @@ def choices():
     print("\n** Main Menu **")
     print("1. Add new contact")
     print("2. DELETE contact")
-    print("3. Display contacts")
+    print("3. Display ALL contacts")
     print("4. Search contacts")
     print("5. Quit contacts app\n")
     while True:
