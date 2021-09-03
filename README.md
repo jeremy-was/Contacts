@@ -1,4 +1,4 @@
-# contacts_app
+# Contacts App
  text based contacts app (saves contacts to a sqlite3 .db file)
  
  1. Add new Contact.
